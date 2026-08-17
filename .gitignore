@@ -1,3 +1,7 @@
 # 环境变量/密钥文件
 .env
 *.env
+
+# 本地工具产物（不纳入版本控制）
+.idea/
+.playwright-mcp/
