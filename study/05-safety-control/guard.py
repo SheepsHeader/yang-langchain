@@ -21,7 +21,7 @@ from langchain.chat_models import init_chat_model
 from langchain.tools import tool
 
 sys.stdout.reconfigure(encoding="utf-8")
-dotenv.load_dotenv(Path(__file__).parent.parent / ".env")
+dotenv.load_dotenv(Path(__file__).parent.parent.parent / ".env")
 
 
 @tool

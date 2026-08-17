@@ -23,7 +23,7 @@ from langchain.agents.middleware import AgentMiddleware
 from langchain.chat_models import init_chat_model
 from langchain_core.messages import SystemMessage
 
-load_dotenv(Path(__file__).parent.parent / ".env")  # 从项目根目录 .env 加载 API key
+load_dotenv(Path(__file__).parent.parent.parent / ".env")  # 从项目根目录 .env 加载 API key
 
 
 # =====================================================================

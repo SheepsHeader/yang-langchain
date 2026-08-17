@@ -5,3 +5,7 @@
 # 本地工具产物（不纳入版本控制）
 .idea/
 .playwright-mcp/
+
+# Python 缓存
+__pycache__/
+*.pyc

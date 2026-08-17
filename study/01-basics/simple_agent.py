@@ -8,7 +8,7 @@ from langchain.tools import tool, ToolRuntime  # @tool: 函数→BaseTool；Tool
 from langgraph.checkpoint.memory import InMemorySaver  # 记忆 checkpointer：跨轮次持久化对话状态（内存版）
 
 
-load_dotenv(Path(__file__).parent.parent / ".env")  # 从项目根目录 .env 加载 API key 等环境变量
+load_dotenv(Path(__file__).parent.parent.parent / ".env")  # 从项目根目录 .env 加载 API key 等环境变量
 
 # 定义系统提示
 SYSTEM_PROMPT = """你是一位擅长用双关语表达的专家天气预报员。

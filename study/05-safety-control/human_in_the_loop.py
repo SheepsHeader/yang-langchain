@@ -29,7 +29,7 @@ from langgraph.checkpoint.memory import InMemorySaver
 from langgraph.types import Command
 
 sys.stdout.reconfigure(encoding="utf-8")
-dotenv.load_dotenv(Path(__file__).parent.parent / ".env")
+dotenv.load_dotenv(Path(__file__).parent.parent.parent / ".env")
 
 
 @tool
