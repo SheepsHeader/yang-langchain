@@ -33,10 +33,25 @@ basic_model = ChatDeepSeek(model="deepseek-v4-flash")
 advanced_model = ChatDeepSeek(model="deepseek-v4-pro")
 
 # ============================== 动态选择核心 ==============================
+# @wrap_model_call 的原理 —— 它不是"注解"这么简单，而是一个【工厂】。
+#
+# 装饰（@wrap_model_call）发生时，会当场执行三步：
+#   1. 用 type() 动态生成一个【以函数名命名】的类，继承 AgentMiddleware
+#      —— type("dynamic_model_selection", (AgentMiddleware,), {...})
+#   2. 把被装饰的函数包进 wrapped，成为这个类的 wrap_model_call 方法
+#   3. 实例化这个类，把【实例】塞回函数名变量
+#
+# 所以装饰之后，dynamic_model_selection 从"函数"变成了"AgentMiddleware 实例"，
+# 下面 middleware=[dynamic_model_selection] 传的就是这个实例。
+# 这也是为什么函数签名写 (request, handler) 而不是 (self, request, handler)：
+# 实际调用时 self 会被框架丢弃，直接调你的原函数。
+#
+# 同样的钩子还有 @before_model / @after_model / @wrap_tool_call，机制一致。
+# （custom_state.py 里用的是等价的"类写法"：显式写类 + state_schema + 方法）
 @wrap_model_call
 def dynamic_model_selection(request: ModelRequest, handler) -> ModelResponse:
     """根据对话复杂性选择模型。"""
-    # @wrap_model_call：把函数升级成中间件，LangChain 每次【调用模型前】都会先执行它，
+    # 装饰后的函数是中间件的 wrap_model_call 方法，LangChain 每次【调用模型前】都会先执行它，
     # 然后调用 handler 继续后面的调用链 —— "换模型"就在这一步拦截完成。
     #
     # request：本次请求信息。request.state["messages"] 是当前对话的消息列表，

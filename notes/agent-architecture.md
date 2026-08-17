@@ -1,7 +1,7 @@
 # AI Agent 架构详解
 
 > 结合架构图，逐步拆解 LangChain / LangGraph 智能体的核心组件，并映射到
-> [`study/simple_agent.py`](./simple_agent.py) 中的实际代码。
+> [`simple_agent.py`](../study/simple_agent.py) 中的实际代码。
 
 ![AI Agent 架构图](./pictures/agent-architecture.png)
 
@@ -79,4 +79,4 @@
 
 ---
 
-*图片来源：原图为概念架构图，本文档与 [`simple_agent.py`](./simple_agent.py) 的对照分析基于 LangChain / LangGraph 当前 API。*
+*图片来源：原图为概念架构图，本文档与 [`simple_agent.py`](../study/simple_agent.py) 的对照分析基于 LangChain / LangGraph 当前 API。*
