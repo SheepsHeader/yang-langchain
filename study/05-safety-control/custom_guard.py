@@ -9,7 +9,8 @@ https://langchain-doc.cn/v1/python/langchain/guardrails.html#自定义守卫-cus
 
     'tools'  跳到工具节点   → 跳过【模型那一轮】，直接执行工具调用
     'model'  跳回模型节点   → 跳过工具，强制模型【再答一次】（如输出不合规打回重说）
-    'end'    跳到图终点     → 后面所有节点全跳过（如命中禁用词直接拦截）
+    'end'    跳到图终点     → 跳过 model / tools（如命中禁用词直接拦截）；
+                            注意挂在图末尾的 after_agent 钩子仍会执行
 
     create_agent 的图只有 4 个节点：__start__ → model → tools → __end__。
     能跳哪个目标，取决于从哪个钩子跳 + @hook_config 声明了哪些 can_jump_to：
