@@ -9,3 +9,7 @@
 # Python 缓存
 __pycache__/
 *.pyc
+
+# 本地工作流配置（只提交 notes/ 和 study/ 下的内容）
+.claude/
+openspec/

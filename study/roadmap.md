@@ -9,6 +9,8 @@
 | 3 | `03-state-output/` | 状态与输出：给 agent 加自定义状态格子，并用 ToolStrategy 让模型按 schema 产出结构化 JSON |
 | 4 | `04-streaming/` | 流式输出：用 `stream()` 逐步骤/逐 token 观察 agent 内部动态，先看模拟再跑真实版 |
 | 5 | `05-safety-control/` | 安全与人工控制：PII 脱敏挡住敏感输入，敏感工具调用前暂停等人审批 |
+| 6 | `06-mcp/` | MCP 工具扩展：用 stdio 子进程 + streamable_http 挂载外部工具服务器，一个 agent 同时用多台服务器的工具 |
+| 7 | `07-memory/` | 长期记忆：InMemoryStore 跨对话存取用户数据，工具内经 `runtime.store` 读写、`runtime.context` 识别用户 |
 
 ## 学习建议
 
@@ -16,3 +18,5 @@
 - `02` 和 `03` 讲同一个中间件机制（`wrap_model_call` / `wrap_tool_call` / 自定义状态），建议连读。
 - `04-streaming/stream_sim.py` 不调 API、纯讲 chunk 结构，卡壳时先看它。
 - 最后在 `05` 把生产级 agent 必备的安全护栏补上。
+- `06` 讲 agent 怎么接外部工具生态（MCP）：本地起 `stdio_mcp.py` 数学服务器 + 远程 streamable_http 天气服务器，`mcp_agent.py` 一个 agent 同时调两边的工具。
+- `07` 讲跨对话的长期记忆：`context` 管"这次调用是谁"（运行期元数据），`store` 管"该记什么"（持久数据），先在 `in_mermory_store.py` 看读写搜索，再看工具里怎么存取。
